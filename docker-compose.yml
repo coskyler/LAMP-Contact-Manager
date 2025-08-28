@@ -9,12 +9,14 @@ services:
       - .env
     depends_on:
       - db
+    restart: unless-stopped
 
   db:
     image: mysql:8.0
     env_file: .env
     volumes:
       - mysql_data:/var/lib/mysql
+    restart: unless-stopped
 
 volumes:
   mysql_data:
