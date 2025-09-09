@@ -16,6 +16,8 @@ services:
     env_file: .env
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    restart: unless-stopped
 
 volumes:
   mysql_data:
