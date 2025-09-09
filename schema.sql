@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS Contacts (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(20),
-    email VARCHAR(20),
+    email VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
