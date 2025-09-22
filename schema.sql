@@ -15,8 +15,9 @@ CREATE TABLE IF NOT EXISTS Contacts (
     user_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    phone_number VARCHAR(20),
-    email VARCHAR(255),
+    phone_number VARCHAR(20) NOT NULL DEFAULT '',
+    email VARCHAR(255) NOT NULL DEFAULT '',
+    notes VARCHAR(512) NOT NULL DEFAULT '',
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
 
     INDEX user_index (user_id),
