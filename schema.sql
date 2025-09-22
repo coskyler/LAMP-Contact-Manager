@@ -17,5 +17,9 @@ CREATE TABLE IF NOT EXISTS Contacts (
     last_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(20),
     email VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+
+    INDEX user_index (user_id),
+    name_search TEXT GENERATED ALWAYS AS (LOWER(CONCAT(first_name, ' ', last_name))) STORED,
+    FULLTEXT INDEX name_bigram (name_search) WITH PARSER ngram
 );
