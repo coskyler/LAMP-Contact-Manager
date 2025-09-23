@@ -2,22 +2,23 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/cookie.php';
 
-$action = $_GET['action'] ?? '';
+header('Content-Type: application/json');
 
-if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+$path = $_SERVER['PATH_INFO'] ?? '';
 
-    // If already logged in, redirect to contacts page
-    if(checkAuthCookie() !== null) {
-        header("Location: /contacts");
-        exit;
-    }
+if ($path === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents("php://input"), true) ?? [];
 
-    $user   = trim($_POST['username'] ?? '');
-    $pass   = $_POST['password'] ?? '';
+    $user = trim($data['username'] ?? '');
+    $pass = $data['password'] ?? '';
 
     // Check for empty fields
     if ($user === '' || $pass === '') {
-        echo "All fields are required";
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => "All fields are required"
+        ]);
         exit;
     }
 
@@ -30,35 +31,55 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
-            echo "Invalid username or password";
+            http_response_code(401);
+            echo json_encode([
+                'success' => false,
+                'message' => "Invalid username or password"
+            ]);
             exit;
         }
 
         if (!password_verify($pass, $row['password'])) {
-            echo "Invalid username or password";
+            http_response_code(401);
+            echo json_encode([
+                'success' => false,
+                'message' => "Invalid username or password"
+            ]);
             exit;
         }
 
         setAuthCookie($row['id']);
         
-        echo "OK";
+        echo json_encode([
+            'success' => true,
+            'message' => "Logged in"
+        ]);
 
     } catch(PDOException $e) {
         error_log($e->getMessage());
         http_response_code(500);
-        echo "Database error";
+        echo json_encode([
+            'success' => false,
+            'message' => "Database error"
+        ]);
     } catch (Throwable $e) {
         error_log($e->getMessage());
         http_response_code(500);
-        echo "Server error";
+        echo json_encode([
+            'success' => false,
+            'message' => "Server error"
+        ]);
     }
     exit;
 }
 
-if ($action === 'logout' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($path === '/logout' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     deleteAuthCookie();
 
-    header("Location: /");
+    echo json_encode([
+        'success' => true,
+        'message' => "Logged out"
+    ]);
     exit;
 }
 ?>
