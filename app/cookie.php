@@ -22,7 +22,7 @@ function deleteAuthCookie(): void {
         "path"     => "/",
         "httponly" => true,
         "samesite" => "Strict",
-        "secure"   => true
+        "secure"   => false
     ]);
 }
 
