@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db.php';
-require_once __DIR__ . '/../cookie.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cookie.php';
 
 header('Content-Type: application/json');
 
