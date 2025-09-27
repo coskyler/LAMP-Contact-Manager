@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/cookie.php';
 
 header('Content-Type: application/json');
 
-$path = $_SERVER['PATH_INFO'] ?? '';
+$path = $_GET['path'] ?? '';
 
 if ($path === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true) ?? [];
