@@ -16,8 +16,8 @@ services:
     env_file: .env
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./schema.sql:/docker-entrypoint-initdb.d/10_schema.sql:ro
-      - ./mock_data.sql:/docker-entrypoint-initdb.d/20_mock_data.sql:ro
+      - ./mysql-conf/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./mysql-conf/my.cnf:/etc/mysql/conf.d/my.cnf:ro
     restart: unless-stopped
 
 volumes:

@@ -292,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
             http_response_code(404);
             echo json_encode([
                 'success' => false,
-                'message' => "No change / Contact not found"
+                'message' => "No changes made"
             ]);
             exit;
         }

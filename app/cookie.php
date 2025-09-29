@@ -12,7 +12,7 @@ function setAuthCookie(string $userId, int $ttl = 604800): void {
         "path"     => "/",
         "httponly" => true,
         "samesite" => "Strict",
-        "secure"   => true
+        "secure"   => false
     ]);
 }
 

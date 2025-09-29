@@ -11,7 +11,8 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8f9fa;
+            background: linear-gradient(to bottom right, #bfdbfe, #ffffff, #e9d5ff);
+            background-attachment: fixed;
         }
         .register-form {
             width: 100%;
@@ -24,6 +25,8 @@
 <body>
     <main class="register-form">
         <form id="registerForm">
+            <h1 class="h3 mb-4 text-center fw-semibold" style="color:#2563eb; font-size:26px;">MyContacts</h1>
+
             <h1 class="h3 mb-3 fw-normal text-center">Create an Account</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="first_name" placeholder="First Name" required>
