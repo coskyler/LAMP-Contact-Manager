@@ -6,13 +6,13 @@ A **containerized LAMP stack** contact manager deployed behind an **NGINX revers
 - **Secure authentication** - password hashing and managed sessions  
 - **Full contact management** - add, edit, search, and delete entries  
 - **Optimized n-gram search** - fast, accurate, and scalable name matching   
-- **Persistent MySQL storage** - ensuring reliable data integrity  
+- **Persistent storage** - ensuring reliable data integrity  
 
 ## Tech Stack
-- **Backend:** PHP, MySQL  
+- **Backend:** Apache, PHP, MySQL  
 - **Frontend:** HTML, CSS, JavaScript  
-- **Proxy:** NGINX (TLS termination, routing to Apache)  
-- **Deployment:** Docker Compose (multi-service stack)
+- **Proxy:** NGINX (TLS termination)  
+- **Deployment:** Docker Compose on a Linux server
 
 ## Setup
 1. Clone or download this repository  
